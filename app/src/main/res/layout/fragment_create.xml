@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121826"
+    android:padding="24dp">
+
+    <!-- Screen Title -->
+    <TextView
+        android:id="@+id/tvCreateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Host a Game"
+        android:textColor="#F9FAFB"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Game Title Input -->
+    <EditText
+        android:id="@+id/etGameTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#1F2937"
+        android:hint="Game Title (e.g. 3v3 Basketball Run)"
+        android:minHeight="56dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColor="#F9FAFB"
+        android:textColorHint="#9CA3AF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCreateTitle" />
+
+    <!-- Sport Input -->
+    <EditText
+        android:id="@+id/etSportType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="#1F2937"
+        android:hint="Sport (Basketball, Soccer, etc.)"
+        android:minHeight="56dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColor="#F9FAFB"
+        android:textColorHint="#9CA3AF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etGameTitle" />
+
+    <!-- People Required Container (Icon + People Count EditText) -->
+    <LinearLayout
+        android:id="@+id/layoutPeople"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etSportType">
+
+        <ImageView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="Person Icon"
+            android:src="@android:drawable/ic_menu_myplaces"
+            app:tint="#10B981" />
+
+        <EditText
+            android:id="@+id/edittext_people_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#1F2937"
+            android:hint="Number of Players"
+            android:inputType="number"
+            android:minHeight="56dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="#F9FAFB"
+            android:textColorHint="#9CA3AF" />
+    </LinearLayout>
+
+    <!-- Location Input -->
+    <EditText
+        android:id="@+id/edittext_location"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="#1F2937"
+        android:hint="Location (e.g. Lake Eola Park)"
+        android:inputType="textPostalAddress"
+        android:minHeight="56dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColor="#F9FAFB"
+        android:textColorHint="#9CA3AF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutPeople" />
+
+    <!-- Date and Time Inputs Container -->
+    <LinearLayout
+        android:id="@+id/layoutDateTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edittext_location">
+
+        <!-- Date Input -->
+        <EditText
+            android:id="@+id/edittext_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="#1F2937"
+            android:clickable="true"
+            android:drawableEnd="@android:drawable/ic_menu_today"
+            android:focusable="false"
+            android:hint="Date"
+            android:minHeight="56dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="#F9FAFB"
+            android:textColorHint="#9CA3AF" />
+
+        <!-- Time Input -->
+        <EditText
+            android:id="@+id/edittext_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="#1F2937"
+            android:clickable="true"
+            android:drawableEnd="@android:drawable/ic_menu_recent_history"
+            android:focusable="false"
+            android:hint="Time"
+            android:minHeight="56dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="#F9FAFB"
+            android:textColorHint="#9CA3AF" />
+    </LinearLayout>
+
+    <!-- Create Event Button pinned at bottom -->
+    <Button
+        android:id="@+id/btn_create_event"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#10B981"
+        android:minHeight="56dp"
+        android:text="Create event"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
