@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -35,6 +36,8 @@ dependencies {
     implementation(libs.activity.ktx)
     implementation(libs.appcompat)
     implementation(libs.constraintlayout)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.messaging)
     implementation(libs.material)
     // Jetpack Navigation for Compose
     implementation("androidx.navigation:navigation-compose:2.8.0")
