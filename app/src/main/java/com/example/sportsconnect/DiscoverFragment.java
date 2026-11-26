@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -36,7 +37,15 @@ public class DiscoverFragment extends Fragment {
         sampleGames.add(new Game("4", "Badminton", "Badminton Pickup ", "📍 UCF Memory Mall • 🕒 Today, 5:30 PM", 2, 4));
 
         GameAdapter adapter = new GameAdapter(sampleGames, clickedGame -> {
-            // Handle Join Game button click action here
+            if (JoinedGamesStore.joinGame(clickedGame)) {
+                Toast.makeText(getContext(),
+                        "Joined! A group chat is now available in Messages.",
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(),
+                        "You already joined this game.",
+                        Toast.LENGTH_SHORT).show();
+            }
         });
 
         recyclerView.setAdapter(adapter);

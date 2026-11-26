@@ -17,6 +17,7 @@ public class Game {
         this.maxPlayers = maxPlayers;
     }
 
+    public String getId() { return id; }
     public String getSport() { return sport; }
     public String getTitle() { return title; }
     public String getLocationTime() { return locationTime; }

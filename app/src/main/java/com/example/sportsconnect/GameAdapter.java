@@ -37,6 +37,9 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
         holder.tvPlayerCount.setText(game.getCurrentPlayers() + "/" + game.getMaxPlayers() + " Spots Filled");
         holder.tvGameTitle.setText(game.getTitle());
         holder.tvLocationTime.setText(game.getLocationTime());
+        boolean alreadyJoined = JoinedGamesStore.isJoined(game);
+        holder.btnJoinGame.setText(alreadyJoined ? "Joined" : "Join Game");
+        holder.btnJoinGame.setEnabled(!alreadyJoined);
 
         holder.btnJoinGame.setOnClickListener(v -> listener.onJoinClick(game));
     }
