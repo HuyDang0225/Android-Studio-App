@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -52,17 +53,49 @@ public class ChatDetailFragment extends Fragment {
 
         title.setText(game.getTitle());
         details.setText(game.getSport() + " • " + game.getLocationTime());
-        renderMessages();
+        refreshMessages();
 
         sendButton.setOnClickListener(v -> {
-            JoinedGamesStore.addMessage(gameId, messageInput.getText().toString());
-            messageInput.setText("");
-            renderMessages();
+            JoinedGamesStore.sendMessage(requireContext(), gameId,
+                    messageInput.getText().toString(), new JoinedGamesStore.OperationCallback() {
+                        @Override
+                        public void onSuccess() {
+                            messageInput.setText("");
+                            refreshMessages();
+                        }
+
+                        @Override
+                        public void onError(Exception exception) {
+                            Toast.makeText(getContext(),
+                                    "Message could not be saved.",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
         });
     }
 
-    private void renderMessages() {
-        List<String> messages = JoinedGamesStore.getMessages(gameId);
+    private void refreshMessages() {
+        JoinedGamesStore.loadMessages(requireContext(), gameId,
+                new JoinedGamesStore.MessagesCallback() {
+                    @Override
+                    public void onChanged(List<String> messages) {
+                        if (isAdded()) {
+                            renderMessages(messages);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Exception exception) {
+                        if (isAdded()) {
+                            Toast.makeText(getContext(),
+                                    "Unable to load saved messages.",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+    }
+
+    private void renderMessages(List<String> messages) {
         StringBuilder text = new StringBuilder();
         for (String message : messages) {
             if (text.length() > 0) {
@@ -70,6 +103,8 @@ public class ChatDetailFragment extends Fragment {
             }
             text.append(message);
         }
-        messagesView.setText(text.toString());
+        messagesView.setText(text.length() == 0
+                ? "No messages yet. Start the conversation."
+                : text.toString());
     }
 }

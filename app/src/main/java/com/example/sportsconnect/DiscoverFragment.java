@@ -36,18 +36,38 @@ public class DiscoverFragment extends Fragment {
         sampleGames.add(new Game("3", "Soccer", "Casual Grass Pickup", "📍 UCF RWC Park • 🕒 Tomorrow, 7:00 PM", 5, 11));
         sampleGames.add(new Game("4", "Badminton", "Badminton Pickup ", "📍 UCF Memory Mall • 🕒 Today, 5:30 PM", 2, 4));
 
-        GameAdapter adapter = new GameAdapter(sampleGames, clickedGame -> {
-            if (JoinedGamesStore.joinGame(clickedGame)) {
-                Toast.makeText(getContext(),
-                        "Joined! A group chat is now available in Messages.",
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getContext(),
-                        "You already joined this game.",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+        GameAdapter adapter = new GameAdapter(sampleGames, clickedGame ->
+                JoinedGamesStore.joinGame(requireContext(), clickedGame,
+                        new JoinedGamesStore.OperationCallback() {
+                            @Override
+                            public void onSuccess() {
+                                Toast.makeText(getContext(),
+                                        "Joined! A group chat is now available in Messages.",
+                                        Toast.LENGTH_SHORT).show();
+                                if (recyclerView.getAdapter() != null) {
+                                    recyclerView.getAdapter().notifyDataSetChanged();
+                                }
+                            }
+
+                            @Override
+                            public void onError(Exception exception) {
+                                Toast.makeText(getContext(),
+                                        "Could not save your joined game.",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        }));
 
         recyclerView.setAdapter(adapter);
+        JoinedGamesStore.loadJoinedGames(requireContext(), new JoinedGamesStore.GamesCallback() {
+            @Override
+            public void onLoaded(List<Game> games) {
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(Exception exception) {
+                // The feed remains usable even if joined-game data cannot be loaded.
+            }
+        });
     }
 }
