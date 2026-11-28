@@ -35,14 +35,13 @@
 
     <!-- Username Input -->
     <EditText
-        android:id="@+id/edittext_user_name"
+        android:id="@+id/textUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@android:color/transparent"
         android:hint="Enter Name"
         android:inputType="textPersonName"
-        android:text="Huy Dang"
         android:textAlignment="center"
         android:textColor="#F9FAFB"
         android:textSize="24sp"
@@ -62,7 +61,7 @@
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edittext_user_name">
+        app:layout_constraintTop_toBottomOf="@id/textUserName">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -81,7 +80,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="12"
+                    android:text="0"
                     android:textColor="#10B981"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -104,7 +103,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4"
+                    android:text="0"
                     android:textColor="#10B981"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -133,6 +132,7 @@
         app:layout_constraintTop_toBottomOf="@id/cardStats">
 
         <TextView
+            android:id="@+id/textFavoriteSport"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Favorite Sport"
@@ -140,11 +140,11 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/text_favorite_sport"
+            android:id="@+id/textFavoriteSportInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Soccer"
+            android:text="..."
             android:textColor="#F9FAFB"
             android:textSize="18sp" />
     </LinearLayout>
@@ -174,14 +174,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Orlando"
+            android:text="..."
             android:textColor="#F9FAFB"
             android:textSize="18sp" />
     </LinearLayout>
 
     <!-- Edit Profile Button pinned at bottom -->
     <Button
-        android:id="@+id/btn_edit_profile"
+        android:id="@+id/buttonEditProfile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
